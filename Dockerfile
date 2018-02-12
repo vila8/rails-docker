@@ -1,5 +1,6 @@
 FROM ruby:2.1.5
-MAINTAINER Jesús Vila <jvila@ciencias.unam.mx>
+
+LABEL author="Jesús Vila <jvila@ciencias.unam.mx>"
 LABEL version="1.1"
 
 RUN apt-get update \
