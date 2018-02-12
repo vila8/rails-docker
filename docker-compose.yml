@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=app_dev
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+    ports:
+      - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  rails:
+    build: .
+    command: dev
+    volumes:
+      - ./app:/usr/src/app
+      - ./bin:/usr/src/scripts
+    entrypoint: /usr/src/scripts/docker-entrypoint.sh
+    ports:
+      - 3000:3000
+    links:
+      - db
+
+volumes:
+  db_data:
+    driver: local
