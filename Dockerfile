@@ -1,7 +1,7 @@
 FROM ruby:2.1.5
 
 LABEL author="Jesús Vila <jvila@ciencias.unam.mx>"
-LABEL version="1.1"
+LABEL version="1.2"
 
 RUN apt-get update \
     && apt-get install -qq -y build-essential nodejs \
@@ -9,10 +9,12 @@ RUN apt-get update \
 
 ENV home /usr/src/app
 ENV scripts /usr/src/scripts/
-WORKDIR $home
 
-ADD app $home
-ADD bin/docker-entrypoint.sh $scripts
-RUN chmod +x ${scripts}/docker-entrypoint.sh
+WORKDIR ${scripts}
+ADD bin/docker-entrypoint.sh .
+RUN chmod +x docker-entrypoint.sh
+
+WORKDIR ${home}
+ADD app .
 
 RUN bundle install

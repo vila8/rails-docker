@@ -1,11 +1,12 @@
 version: '3'
+
 services:
   db:
-    image: postgres
-    environment:
-      - POSTGRES_DB=app_dev
-      - POSTGRES_USER=test
-      - POSTGRES_PASSWORD=test
+    image: postgres:9.6
+    environment: &postgres_env
+      POSTGRES_DB: app_dev
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
     ports:
       - 5432:5432
     volumes:
@@ -14,12 +15,15 @@ services:
   rails:
     build: .
     command: dev
+    image: rails:latest
+    ports:
+      - 3000:3000
     volumes:
       - ./app:/usr/src/app
       - ./bin:/usr/src/scripts
+    environment:
+      <<: *postgres_env
     entrypoint: /usr/src/scripts/docker-entrypoint.sh
-    ports:
-      - 3000:3000
     links:
       - db
 
