@@ -1,7 +1,7 @@
 FROM ruby:2.1.5
 
 LABEL author="Jesús Vila <jvila@ciencias.unam.mx>"
-LABEL version="1.2"
+LABEL version="1.3"
 
 RUN apt-get update \
     && apt-get install -qq -y build-essential nodejs \
@@ -18,3 +18,5 @@ WORKDIR ${home}
 ADD app .
 
 RUN bundle install
+
+CMD rails server -p $PORT
