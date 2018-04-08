@@ -12,10 +12,10 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
-  rails:
+  rails_dev:
     build: .
     command: dev
-    image: rails:latest
+    image: rails_fciencias
     ports:
       - 3000:3000
     volumes:
