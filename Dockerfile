@@ -1,7 +1,7 @@
 FROM ruby:2.1.5
 
 LABEL author="Jesús Vila <jvila@ciencias.unam.mx>"
-LABEL version="1.4"
+LABEL version="1.5"
 
 RUN apt-get update \
     && apt-get install -qq -y build-essential nodejs \
@@ -17,6 +17,6 @@ RUN chmod +x docker-entrypoint.sh
 WORKDIR ${home}
 ADD app .
 
-RUN bundle install --without=development
+RUN bundle install --without development:test
 
-CMD bundle exec puma
+CMD bundle exec puma -C config/puma.rb
