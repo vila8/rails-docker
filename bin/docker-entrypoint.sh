@@ -11,6 +11,7 @@ set -e
 case "$1" in
     dev)
         echo "Running Development Server on ${HOST:=0.0.0.0}:${PORT:=3000}"
+        bundle install --without production
         rails server -b $HOST -p $PORT
     ;;
     create)
