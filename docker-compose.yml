@@ -4,20 +4,20 @@ services:
   db:
     image: postgres:9.6
     environment: &postgres_env
-      POSTGRES_DB: app_dev
+      POSTGRES_DB: app_dev_1
       POSTGRES_USER: test
       POSTGRES_PASSWORD: test
     ports:
-      - 5432:5432
+      - 5433:5432
     volumes:
       - db_data:/var/lib/postgresql/data
 
-  rails_dev:
+  rails_dev_1:
     build: .
     command: dev
-    image: rails_fciencias
+    image: rails_fciencias:1.0
     ports:
-      - 3000:3000
+      - 3001:3000
     volumes:
       - ./app:/usr/src/app
       - ./bin:/usr/src/scripts

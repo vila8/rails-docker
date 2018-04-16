@@ -19,4 +19,7 @@ ADD app .
 
 RUN bundle install --without development:test
 
+RUN useradd -ms /bin/bash vila
+RUN chown -R vila .
+
 CMD bundle exec puma -C config/puma.rb
